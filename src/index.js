@@ -72,6 +72,9 @@ function setMarkup(response) {
   }
   loadMoreBtn.removeAttribute('hidden');
   imageList.insertAdjacentHTML('beforeend', createMarkup(response.data.hits));
+  if (totalHits <= 40) {
+    loadMoreBtn.setAttribute('hidden', 'true');
+  }
   if (response.data.hits.length < 40) {
     loadMoreBtn.setAttribute('hidden', 'true');
     Notify.failure(
