@@ -72,14 +72,15 @@ function setMarkup(response) {
   }
   loadMoreBtn.removeAttribute('hidden');
   imageList.insertAdjacentHTML('beforeend', createMarkup(response.data.hits));
-  if (totalHits <= 40) {
-    loadMoreBtn.setAttribute('hidden', 'true');
-  }
-  if (response.data.hits.length < 40) {
+  let count = Math.floor(response.data.totalHits / response.data.hits.length);
+  if (count === page && page > 1) {
     loadMoreBtn.setAttribute('hidden', 'true');
     Notify.failure(
       "We're sorry, but you've reached the end of search results."
     );
+  }
+  if (count === page) {
+    loadMoreBtn.setAttribute('hidden', 'true');
   }
 }
 
